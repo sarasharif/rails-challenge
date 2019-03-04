@@ -31,8 +31,15 @@ ActiveRecord::Schema.define(version: 2019_02_27_215024) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.string "name"
     t.integer "cost"
     t.integer "stock_amount"
+    t.float "weight"
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_variants_on_product_id"
   end
 
 end
