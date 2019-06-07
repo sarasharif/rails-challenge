@@ -5,7 +5,7 @@ RSpec.describe 'Orders API', type: :request do
     before {
 			Customer.create!(name: "Lucy", email: "Lucy@DogeBear.com")
 			Product.create!()
-			Variant.create!(stock_amount: 10, product_id: 1)
+			Variant.create!(stock_amount: 10, product_id: 1, cost: 10)
 		}
 
     context 'when the request doesn\'t contain the `customer_id`' do
