@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Orders API', type: :request do
   describe 'POST /orders' do
     before {
-			Customer.create!(name: "Lucy", email: "Lucy@DogeBear.com")
-			Product.create!()
-			Variant.create!(stock_amount: 10, product_id: 1, cost: 10)
+			Customer.create(name: "Lucy", email: "Lucy@DogeBear.com")
+			Product.create()
+			Variant.create(stock_amount: 10, product_id: 1, cost: 10)
 		}
 
     context 'when the request doesn\'t contain the `customer_id`' do
