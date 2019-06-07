@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_06_063619) do
+ActiveRecord::Schema.define(version: 2019_06_07_065440) do
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_063619) do
     t.integer "count"
     t.integer "variant_id"
     t.integer "order_id"
+    t.integer "price"
     t.index ["order_id"], name: "index_suborders_on_order_id"
     t.index ["variant_id"], name: "index_suborders_on_variant_id"
   end

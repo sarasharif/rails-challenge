@@ -1,20 +1,7 @@
 class OrdersController < ApplicationController
 	def show
 		@order = Order.find(params[:id])
-		render json: {
-			date_created: @order.created_at,
-			customer: @order.customer,
-			total_cost: @order.cost,
-			order_status: @order.status,
-			items: @order.suborders.map do |suborder|
-				{
-					id: suborder.variant_id,
-					name: suborder.variant.name,
-					price: suborder.variant.cost,
-					quantity: suborder.count,
-				}
-			end
-		}
+		compile_order_json
 	end
 
 	def create
@@ -87,9 +74,27 @@ class OrdersController < ApplicationController
 			Suborder.create!(
 				count: count,
 				variant_id: var_id,
-				order_id: @order.id
+				order_id: @order.id,
+				price: Variant.find(var_id).cost
 			)
 		end
+	end
+
+	def compile_order_json
+		render json: {
+			date_created: @order.created_at,
+			customer: @order.customer,
+			total_cost: @order.cost,
+			order_status: @order.status,
+			items: @order.suborders.map do |suborder|
+				{
+					id: suborder.variant_id,
+					name: suborder.variant.name,
+					price: suborder.price,
+					quantity: suborder.count,
+				}
+			end
+		}
 	end
 
 	def order_params
