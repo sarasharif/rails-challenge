@@ -1,7 +1,22 @@
 class OrdersController < ApplicationController
 	def show
+		@order = Order.find(params[:id])
+		render json: {
+			date_created: @order.created_at,
+			customer: @order.customer,
+			total_cost: @order.cost,
+			order_status: @order.status,
+			items: @order.suborders.map do |suborder|
+				{
+					id: suborder.variant_id,
+					name: suborder.variant.name,
+					price: suborder.variant.cost,
+					quantity: suborder.count,
+				}
+			end
+		}
 	end
-	
+
 	def create
 		if !invalid_order_request
 			@order = Order.new(
@@ -11,6 +26,7 @@ class OrdersController < ApplicationController
 			)
 
 			if @order.save
+				generate_suborders
 				return head 200
 			else
 				return head 500
@@ -63,6 +79,16 @@ class OrdersController < ApplicationController
 	def calculate_total_cost
 		order_params["variants"].to_h.reduce(0) do |accum, (id, quant)|
 			accum += quant.to_i * Variant.find(id).cost
+		end
+	end
+
+	def generate_suborders
+		order_params["variants"].to_h.each do |var_id, count|
+			Suborder.create!(
+				count: count,
+				variant_id: var_id,
+				order_id: @order.id
+			)
 		end
 	end
 
