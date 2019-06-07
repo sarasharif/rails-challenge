@@ -66,5 +66,4 @@ RSpec.describe 'Orders API', type: :request do
       end
     end
 	end
-
 end

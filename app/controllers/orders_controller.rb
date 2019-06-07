@@ -34,8 +34,9 @@ class OrdersController < ApplicationController
 		return false
 	end
 
-	# Here, however, I would personally prefer to capture these errors and 
-	# technically send back a 200 in the header but with a body like
+	# Here, however, instead of what was indicated in the instructions,
+	# I would personally prefer to capture these errors and send back a
+	# 200 in the header but with a body like
 	# {
 	# 	error: {
 	# 		code: 422,
@@ -53,7 +54,7 @@ class OrdersController < ApplicationController
 		@variants = order_params["variants"]
 		@variant_ids = @variants.keys
 		is_valid_customer = Customer.exists?(order_params["customer_id"])
-		all_variant_ids_valid = @variant_ids.all?{|var_id| Variant.exists?(var_id)}
+		all_variant_ids_valid = @variant_ids.all? { |var_id| Variant.exists?(var_id) }
 		return is_valid_customer && all_variant_ids_valid
 	end
 	
@@ -101,5 +102,4 @@ class OrdersController < ApplicationController
 	def order_params
 		params.permit(:customer_id, :variants => {})
 	end
-
 end
