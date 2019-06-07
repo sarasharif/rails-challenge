@@ -22,11 +22,11 @@ A user account and some stock items have already been generated for you.
 
 ```
 {
-	"customer_id": 1,
-	"variants": {
-		"1": 2,
-		"2": 1
-	}
+  "customer_id": 1,
+  "variants": {
+    "1": 2,
+    "2": 1
+  }
 }
 ```
 
@@ -37,29 +37,29 @@ But please test out the POST endpoint first :)
 `GET localhost:3000/orders/1`
 ```
 {
-	"date_created": "2019-06-07T07:46:37.034Z",
-	"customer": {
-		"id": 1,
-		"name": "Lucy",
-		"email": "Lucy@DogeMail.com"
-	},
-	"total_cost": 1020,
-	"order_status": "pending",
-	"items": [
-		{
-			"id": 1,
-			"name": "Collar",
-			"style": "Red",
-			"price": 10,
-			"quantity": 2
-		},
-		{
-			"id": 2,
-			"name": "Collar",
-			"style": "Shiny Metal",
-			"price": 1000,
-			"quantity": 1
-		}
-	]
+  "date_created": "2019-06-07T07:46:37.034Z",
+  "customer": {
+    "id": 1,
+    "name": "Lucy",
+    "email": "Lucy@DogeMail.com"
+  },
+  "total_cost": 1020,
+  "order_status": "pending",
+  "items": [
+    {
+      "id": 1,
+      "name": "Collar",
+      "style": "Red",
+      "price": 10,
+      "quantity": 2
+    },
+    {
+      "id": 2,
+      "name": "Collar",
+      "style": "Shiny Metal",
+      "price": 1000,
+      "quantity": 1
+    }
+  ]
 }
 ```
