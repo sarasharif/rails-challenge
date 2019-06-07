@@ -89,7 +89,8 @@ class OrdersController < ApplicationController
 			items: @order.suborders.map do |suborder|
 				{
 					id: suborder.variant_id,
-					name: suborder.variant.name,
+					name: suborder.product.name,
+					style: suborder.variant.name,
 					price: suborder.price,
 					quantity: suborder.count,
 				}
